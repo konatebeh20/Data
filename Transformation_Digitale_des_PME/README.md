@@ -1,8 +1,8 @@
 # Transformation Digitale des PME - Côte d'Ivoire
 
-![Bannière Transformation Digitale](https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=400&q=80)
+![Bannière Transformation Digitale Banière 1](https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=400&q=80)
 
-![Bannière Transformation Digitale](https://www.afrikibaria.com/?p=1257)
+![Bannière Transformation Digitale Banière 2](https://www.afrikibaria.com/wp-content/uploads/2021/12/exemple-image.jpg)
 
 
 Interface web interactive présentant une étude sur les stratégies de digitalisation des PME en Côte d'Ivoire.
