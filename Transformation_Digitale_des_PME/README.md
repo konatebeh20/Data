@@ -2,7 +2,7 @@
 
 ![Bannière Transformation Digitale Banière 1](https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=400&q=80)
 
-![Bannière Transformation Digitale Banière 2](assets/img/nom-de-ton-image.jpg)
+<!-- ![Bannière Transformation Digitale Banière 2](assets/img/nom-de-ton-image.jpg) -->
 
 
 Interface web interactive présentant une étude sur les stratégies de digitalisation des PME en Côte d'Ivoire.
