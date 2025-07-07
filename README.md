@@ -15,6 +15,6 @@ Analyse des stratégies d'adaptation des PME ivoiriennes face à la digitalisati
   - LICENCE spécifique au projet
 
 ## Comment contribuer
-1. Clonez le dépôt : `git clone https://github.com/votre-utilisateur/votre-repo.git`
+1. Clonez le dépôt : `git clone git@github.com:konatebeh20/Data.git`
 2. Naviguez vers le dossier du projet souhaité
 3. Consultez le README du projet pour les instructions spécifiques
