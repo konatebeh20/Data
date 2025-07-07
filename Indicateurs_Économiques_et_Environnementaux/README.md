@@ -1,6 +1,6 @@
 # Indicateurs Économiques et Environnementaux
 
-![Indicateurs Économiques et Environnementaux](https://i.imgur.com/3JkZ7Q9.png)
+![Indicateurs Économiques et Environnementaux](assets/img/indicateurs_economiques_environnementaux.jpeg)
 <!-- ![Indicateurs Économiques et Environnementaux](./assets/img/indicateurs-economiques-et-Environnementaux.png) -->
 
 ## Description
