@@ -9,10 +9,12 @@ Analyse des stratégies d'adaptation des PME ivoiriennes face à la digitalisati
 
 ### [Évolution du Taux de Pénétration Mobile en Afrique](./Evolution_du_Taux_de_Pénétration_Mobile_en_Afrique)
 Analyse des du taux de pénétration mobile en Afrique de 2015 à 2025, par région, en Afrique.
+<!-- Analyse des du taux de pénétration mobile en Afrique de 2015 à 2025, par région, en Afrique. -->
 
-<!-- ### [Évolution du Taux de Pénétration Mobile en Afrique](/Evolution_du_Taux_de Pénétration_Mobile_en_Afrique) -->
-<!-- Analyse des du taux de pénétration mobile en Afrique de 2015 à 2025, par région, en Afrique. -->
-<!-- Analyse des du taux de pénétration mobile en Afrique de 2015 à 2025, par région, en Afrique. -->
+
+### [Indicateurs Économiques et Environnementaux](./Indicateurs_Économiques_et_Environnementaux)
+Analyse des du taux de pénétration mobile en Afrique de 2015 à 2025, par région, en Afrique.
+
 
 ## Structure
 - Chaque projet est dans son propre sous-dossier
