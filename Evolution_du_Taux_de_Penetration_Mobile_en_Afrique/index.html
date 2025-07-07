@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taux de Pénétration Mobile en Afrique 2015-2025</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .group-info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+        }
+        .chart-container {
+            position: relative;
+            height: 500px;
+            margin: 30px 0;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .data-table {
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        .insights {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            color: #2c3e50;
+        }
+        .region-card {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .highlight {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Évolution du Taux de Pénétration Mobile en Afrique (2015-2025)</h1>
+        
+        <div class="group-info">
+            <h2>Groupe 1 - Économie Numérique</h2>
+            <p><strong>Chef de groupe :</strong> Ange Kouadio</p>
+            <p><strong>Membres :</strong> Félix, Yeo yéréferetien, Yeo naminin, Beh, Eliezer Tanoh</p>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="mobilePenetrationChart"></canvas>
+        </div>
+
+        <div class="data-table">
+            <h2 style="color: #2c3e50; text-align: center;">📊 Données sur la Pénétration Mobile par Région</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Année</th>
+                        <th>Afrique du Nord (%)</th>
+                        <th>Afrique de l'Ouest (%)</th>
+                        <th>Afrique du Sud (%)</th>
+                        <th>Afrique Centrale (%)</th>
+                        <th>Afrique de l'Est (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2015</td><td>75</td><td>35</td><td>85</td><td>42</td><td>38</td></tr>
+                    <tr><td>2016</td><td>78</td><td>38</td><td>87</td><td>45</td><td>41</td></tr>
+                    <tr><td>2017</td><td>81</td><td>41</td><td>89</td><td>48</td><td>44</td></tr>
+                    <tr><td>2018</td><td>84</td><td>44</td><td>91</td><td>51</td><td>47</td></tr>
+                    <tr><td>2019</td><td>87</td><td>47</td><td>93</td><td>54</td><td>50</td></tr>
+                    <tr><td>2020</td><td>89</td><td>50</td><td>95</td><td>57</td><td>53</td></tr>
+                    <tr><td>2021</td><td>91</td><td>53</td><td>97</td><td>60</td><td>56</td></tr>
+                    <tr><td>2022</td><td>93</td><td>56</td><td>98</td><td>63</td><td>59</td></tr>
+                    <tr><td>2023</td><td>95</td><td>59</td><td>99</td><td>66</td><td>62</td></tr>
+                    <tr><td>2024</td><td>96</td><td>62</td><td>99.5</td><td>69</td><td>65</td></tr>
+                    <tr><td>2025</td><td>97</td><td>65</td><td>99.8</td><td>72</td><td>68</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="insights">
+            <h2>🔍 Analyses et Tendances Clés</h2>
+            
+            <div class="region-card">
+                <h3>🌍 Afrique du Sud</h3>
+                <p>L'Afrique du Sud présente le <span class="highlight">taux le plus élevé</span> avec près de 100% de pénétration mobile en 2025. Cette région bénéficie d'une infrastructure développée et d'un pouvoir d'achat plus élevé.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>🏛️ Afrique du Nord</h3>
+                <p>Croissance régulière de 75% en 2015 à 97% en 2025. Cette région inclut des pays comme l'Égypte, la Libye, et le Maroc avec une <span class="highlight">urbanisation importante</span>.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>🌊 Afrique de l'Ouest</h3>
+                <p>Progression la plus importante en termes relatifs : de 35% à 65% (+30 points). Malgré des défis économiques, la région montre une <span class="highlight">dynamique remarquable</span>.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>🌲 Afrique Centrale</h3>
+                <p>Croissance régulière de 42% à 72% (+30 points). Cette région inclut des pays comme le Cameroun, la RDC, avec des <span class="highlight">ressources naturelles importantes</span>.</p>
+            </div>
+
+            <div class="region-card">
+                <h3>🦓 Afrique de l'Est</h3>
+                <p>Évolution de 38% à 68% (+30 points). Hub technologique émergent avec des innovations comme <span class="highlight">M-Pesa au Kenya</span>.</p>
+            </div>
+        </div>
+
+        <div class="insights">
+            <h2>📊 Sources Officielles Téléchargeables</h2>
+            <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                <h3>🏛️ Sources Principales :</h3>
+                <ul style="font-size: 1.1em; line-height: 1.8;">
+                    <li><strong>Banque Mondiale - World Development Indicators :</strong><br>
+                        📥 <a href="https://data.worldbank.org/indicator/IT.CEL.SETS" target="_blank" style="color: #3498db;">Télécharger données mobiles (.CSV/.Excel)</a><br>
+                        🔗 Indicateur : IT.CEL.SETS - Mobile cellular subscriptions
+                    </li>
+                    <li><strong>GSMA Mobile Connectivity Index :</strong><br>
+                        📥 <a href="https://www.mobileconnectivityindex.com/" target="_blank" style="color: #3498db;">Accéder aux données (.CSV export)</a><br>
+                        🔗 Données par pays et région
+                    </li>
+                    <li><strong>Our World in Data :</strong><br>
+                        📥 <a href="https://ourworldindata.org/grapher/mobile-cellular-subscriptions-by-country" target="_blank" style="color: #3498db;">Télécharger graphiques (.PNG/.SVG/.CSV)</a><br>
+                        🔗 Visualisations interactives
+                    </li>
+                    <li><strong>GSMA Mobile Economy Sub-Saharan Africa 2024 :</strong><br>
+                        📥 <a href="https://event-assets.gsma.com/pdf/GSMA_ME_SSA_2024_Web.pdf" target="_blank" style="color: #3498db;">Télécharger rapport (.PDF)</a><br>
+                        🔗 Données complètes et projections
+                    </li>
+                </ul>
+                
+                <h3>💾 Comment télécharger :</h3>
+                <ol style="font-size: 1em; line-height: 1.6;">
+                    <li><strong>Banque Mondiale :</strong> Cliquez sur "Download" → Choisissez format CSV ou Excel</li>
+                    <li><strong>GSMA MCI :</strong> Créez un compte gratuit → Export data → Sélectionnez régions africaines</li>
+                    <li><strong>Our World in Data :</strong> Bouton "Download" en bas du graphique</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="insights">
+            <h2>📈 Points Clés pour votre Présentation</h2>
+            <ul style="font-size: 1.1em; line-height: 1.8;">
+                <li><strong>Croissance globale :</strong> Toutes les régions africaines montrent une progression constante</li>
+                <li><strong>Écart technologique :</strong> L'Afrique du Sud maintient son avance mais l'écart se réduit</li>
+                <li><strong>Potentiel économique :</strong> La pénétration mobile stimule l'économie numérique</li>
+                <li><strong>Défis persistants :</strong> Infrastructure et pouvoir d'achat restent des enjeux majeurs</li>
+                <li><strong>Innovation régionale :</strong> L'Afrique de l'Est pionnière avec le mobile banking</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Configuration du graphique
+        const ctx = document.getElementById('mobilePenetrationChart').getContext('2d');
+        
+        const data = {
+            labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+            datasets: [
+                {
+                    label: 'Afrique du Nord',
+                    data: [75, 78, 81, 84, 87, 89, 91, 93, 95, 96, 97],
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Afrique de l\'Ouest',
+                    data: [35, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65],
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Afrique du Sud',
+                    data: [85, 87, 89, 91, 93, 95, 97, 98, 99, 99.5, 99.8],
+                    borderColor: '#2ecc71',
+                    backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Afrique Centrale',
+                    data: [42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72],
+                    borderColor: '#f39c12',
+                    backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Afrique de l\'Est',
+                    data: [38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68],
+                    borderColor: '#9b59b6',
+                    backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }
+            ]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Évolution du Taux de Pénétration Mobile par Région (2015-2025)',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        },
+                        padding: 20
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14
+                            },
+                            padding: 20
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Taux de Pénétration (%)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Années',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)'
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        };
+
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>

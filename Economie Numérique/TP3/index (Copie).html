@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparaison Afrique Centrale vs Afrique de l'Ouest</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --central: #3498db;
+      --ouest: #2ecc71;
+      --light: #F8F9FA;
+      --shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #e4e7eb);
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      text-align: center;
+      background: linear-gradient(90deg, var(--central), var(--ouest));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+    }
+
+    .chart-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .chart-title {
+      margin-bottom: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 400px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-globe-africa"></i> Comparaison Afrique Centrale vs Afrique de l'Ouest</h1>
+
+    <div class="chart-grid">
+      <!-- PIB -->
+      <div class="chart-card">
+        <h4 class="chart-title"><i class="fas fa-money-bill-wave"></i> PIB Moyen</h4>
+        <div class="chart-container">
+          <canvas id="pibChart"></canvas>
+        </div>
+      </div>
+
+      <!-- CO2 -->
+      <div class="chart-card">
+        <h4 class="chart-title"><i class="fas fa-industry"></i> Émissions CO₂ Moyennes</h4>
+        <div class="chart-container">
+          <canvas id="co2Chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Internet -->
+      <div class="chart-card">
+        <h4 class="chart-title"><i class="fas fa-wifi"></i> Utilisation Internet Moyenne</h4>
+        <div class="chart-container">
+          <canvas id="internetChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Éducation -->
+      <div class="chart-card">
+        <h4 class="chart-title"><i class="fas fa-graduation-cap"></i> Taux d'Alphabétisation Moyen</h4>
+        <div class="chart-container">
+          <canvas id="eduChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Graphique Régional -->
+      <div class="chart-card">
+        <h4 class="chart-title"><i class="fas fa-chart-line"></i> Évolution Régionale</h4>
+        <div class="chart-container">
+          <canvas id="regionalChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Radar Multi-Indicateurs -->
+      <div class="chart-card">
+        <h4 class="chart-title"><i class="fas fa-bullseye"></i> Radar Multi-Indicateurs</h4>
+        <div class="chart-container">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Données Afrique Centrale vs Ouest
+    const centralData = {
+      pib: [8266, 1498, 594, 1830, 729],
+      emissions: [2.8, 0.3, 0.1, 1.0, 0.1],
+      edu: [84.3, 71.3, 77.0, 80.3, 22.3],
+      internet: [72.1, 34.0, 23.2, 21.2, 8.7]
+    };
+
+    const ouestData = {
+      pib: [2085, 2445, 2549, 1606, 1291],
+      emissions: [0.6, 0.6, 0.4, 0.7, 0.6],
+      edu: [62.0, 79.0, 47.2, 51.9, 42.4],
+      internet: [51.0, 53.0, 39.9, 58.2, 36.5]
+    };
+
+    function average(arr) {
+      return arr.reduce((a, b) => a + b, 0) / arr.length;
+    }
+
+    // PIB
+    new Chart(document.getElementById('pibChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Afrique Centrale', 'Afrique de l\'Ouest'],
+        datasets: [{
+          label: 'PIB Moyen (USD/hab)',
+          data: [average(centralData.pib), average(ouestData.pib)],
+          backgroundColor: ['#3498db', '#2ecc71']
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+
+    // CO₂
+    new Chart(document.getElementById('co2Chart'), {
+      type: 'bar',
+      data: {
+        labels: ['Afrique Centrale', 'Afrique de l\'Ouest'],
+        datasets: [{
+          label: 'Émissions CO₂ Moyennes (t/hab)',
+          data: [average(centralData.emissions), average(ouestData.emissions)],
+          backgroundColor: ['#3498db', '#2ecc71']
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true } } }
+    });
+
+    // Internet
+    new Chart(document.getElementById('internetChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Afrique Centrale', 'Afrique de l\'Ouest'],
+        datasets: [{
+          label: 'Utilisation Internet (%)',
+          data: [average(centralData.internet), average(ouestData.internet)],
+          backgroundColor: ['#3498db', '#2ecc71']
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    // Éducation
+    new Chart(document.getElementById('eduChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Afrique Centrale', 'Afrique de l\'Ouest'],
+        datasets: [{
+          label: 'Taux d\'Alphabétisation (%)',
+          data: [average(centralData.edu), average(ouestData.edu)],
+          backgroundColor: ['#3498db', '#2ecc71']
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    // Graphique Régional
+    new Chart(document.getElementById('regionalChart'), {
+    type: 'line',
+    data: {
+        labels: ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],
+        datasets: [
+        {
+            label: 'PIB Afrique Centrale',
+            data: [2500, 2700, 2900, 3100, 3300, 3200, 3400, 3600, 3800, 4000, 4200],
+            borderColor: '#3498db',
+            backgroundColor: 'rgba(52,152,219,0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            yAxisID: 'y'
+        },
+        {
+            label: 'PIB Afrique de l\'Ouest',
+            data: [1800, 1900, 2000, 2150, 2300, 2250, 2400, 2600, 2800, 3000, 3200],
+            borderColor: '#2ecc71',
+            backgroundColor: 'rgba(46,204,113,0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            yAxisID: 'y'
+        },
+        {
+            label: 'GES Afrique Centrale',
+            data: [1.2, 1.3, 1.4, 1.5, 1.6, 1.5, 1.7, 1.8, 2.0, 2.1, 2.3],
+            borderColor: '#f39c12',
+            backgroundColor: 'rgba(243,156,18,0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            yAxisID: 'y'
+        },
+        {
+            label: 'GES Afrique de l\'Ouest',
+            data: [0.5, 0.55, 0.6, 0.65, 0.7, 0.68, 0.72, 0.75, 0.78, 0.8, 0.85],
+            borderColor: '#e74c3c',
+            backgroundColor: 'rgba(231,76,60,0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            yAxisID: 'y'
+        }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+        title: {
+            display: true,
+            text: 'Évolution Régionale',
+            font: { size: 18 }
+        }
+        },
+        scales: {
+        y: {
+            type: 'linear',
+            title: {
+            display: true,
+            text: 'Valeurs'
+            },
+            beginAtZero: true
+        }
+        }
+    }
+    });
+
+    // Radar Multi-Indicateurs
+    new Chart(document.getElementById('radarChart'), {
+    type: 'radar',
+    data: {
+        labels: ['PIB 2025', 'GES 2025', 'Éducation', 'Internet'],
+        datasets: [
+        {
+            label: 'Afrique Centrale',
+            data: [4200, 2.3 * 1000, 70, 50], // PIB et GES pris de la série, Edu/Internet = valeurs ponctuelles ou moyennes
+            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+            borderColor: '#3498db'
+        },
+        {
+            label: 'Afrique de l\'Ouest',
+            data: [3200, 0.85 * 1000, 65, 55],
+            backgroundColor: 'rgba(46, 204, 113, 0.2)',
+            borderColor: '#2ecc71'
+        }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: { 
+        r: { beginAtZero: true }
+        }
+    }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse Comparative : Côte d'Ivoire, Nigeria, Maroc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        'ci': '#E67E22',
+                        'ng': '#27AE60',
+                        'ma': '#C0392B',
+                        'light': '#F8F9FA',
+                        'dark': '#212529',
+                        'gray': {
+                            100: '#F8F9FA',
+                            200: '#E9ECEF',
+                            300: '#DEE2E6',
+                            400: '#CED4DA',
+                            500: '#ADB5BD',
+                            600: '#6C757D',
+                            700: '#495057',
+                            800: '#343A40',
+                            900: '#212529'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #212529;
+            background-color: #F8F9FA;
+        }
+        
+        .stat-bar {
+            transition: width 1s ease-out;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background-color: #E9ECEF;
+        }
+        
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: currentColor;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .country-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .country-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    
+    <!-- Navigation sobre -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl font-semibold text-dark">Analyse Comparative Afrique</h1>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="nav-link text-gray-600 hover:text-dark">Aperçu</a>
+                    <a href="#economy" class="nav-link text-gray-600 hover:text-dark">Économie</a>
+                    <a href="#environment" class="nav-link text-gray-600 hover:text-dark">Environnement</a>
+                    <a href="#education" class="nav-link text-gray-600 hover:text-dark">Éducation</a>
+                    <a href="#digital" class="nav-link text-gray-600 hover:text-dark">Numérique</a>
+                    <a href="#analysis" class="nav-link text-gray-600 hover:text-dark">Analyse</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero section minimaliste -->
+    <section class="py-20 px-6 bg-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-dark">
+                Côte d'Ivoire • Nigeria • Maroc
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                Analyse comparative 1990-2023 : Trois trajectoires, un avenir commun
+            </p>
+            <div class="flex justify-center space-x-4">
+                <div class="w-3 h-3 rounded-full bg-ci"></div>
+                <div class="w-3 h-3 rounded-full bg-ng"></div>
+                <div class="w-3 h-3 rounded-full bg-ma"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aperçu des pays -->
+    <section id="overview" class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-2xl font-semibold text-center mb-12 text-dark">
+                Profils des Pays
+            </h3>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Côte d'Ivoire -->
+                <div class="country-card bg-white rounded-lg p-6 border border-gray-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-ci/10 flex items-center justify-center text-ci font-medium">CI</div>
+                        <h4 class="text-xl font-semibold ml-4 text-dark">Côte d'Ivoire</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">PIB/hab. 2023</span>
+                                <span class="font-medium text-dark">6 485 $</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ci h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">Alphabétisation</span>
+                                <span class="font-medium text-dark">53%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ci h-2 rounded-full" style="width: 53%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">Internet</span>
+                                <span class="font-medium text-dark">45.4%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ci h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">CO₂/hab.</span>
+                                <span class="font-medium text-dark">0.51t</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-green-500 h-2 rounded-full" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-3 bg-gray-100 rounded border border-gray-200">
+                        <p class="text-sm text-gray-700"><strong>Profil :</strong> Modèle de rattrapage avec croissance stable et soutenue depuis 2010</p>
+                    </div>
+                </div>
+                
+                <!-- Nigeria -->
+                <div class="country-card bg-white rounded-lg p-6 border border-gray-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-ng/10 flex items-center justify-center text-ng font-medium">NG</div>
+                        <h4 class="text-xl font-semibold ml-4 text-dark">Nigeria</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">PIB/hab. 2023</span>
+                                <span class="font-medium text-dark">5 593 $</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ng h-2 rounded-full" style="width: 55%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">Alphabétisation</span>
+                                <span class="font-medium text-dark">63%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ng h-2 rounded-full" style="width: 63%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">Internet</span>
+                                <span class="font-medium text-dark">55.4%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ng h-2 rounded-full" style="width: 55%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">CO₂/hab.</span>
+                                <span class="font-medium text-dark">0.56t</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-green-500 h-2 rounded-full" style="width: 11%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-3 bg-gray-100 rounded border border-gray-200">
+                        <p class="text-sm text-gray-700"><strong>Profil :</strong> Géant démographique en transition avec le plus grand potentiel du continent</p>
+                    </div>
+                </div>
+                
+                <!-- Maroc -->
+                <div class="country-card bg-white rounded-lg p-6 border border-gray-200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-ma/10 flex items-center justify-center text-ma font-medium">MA</div>
+                        <h4 class="text-xl font-semibold ml-4 text-dark">Maroc</h4>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">PIB/hab. 2023</span>
+                                <span class="font-medium text-dark">9 743 $</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ma h-2 rounded-full" style="width: 97%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">Alphabétisation</span>
+                                <span class="font-medium text-dark">77%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ma h-2 rounded-full" style="width: 77%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">Internet</span>
+                                <span class="font-medium text-dark">91%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ma h-2 rounded-full" style="width: 91%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-gray-600">CO₂/hab.</span>
+                                <span class="font-medium text-dark">1.95t</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-yellow-500 h-2 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-3 bg-gray-100 rounded border border-gray-200">
+                        <p class="text-sm text-gray-700"><strong>Profil :</strong> Leader régional en connectivité et éducation, économie la plus diversifiée</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Section Économie -->
+    <section id="economy" class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-2xl font-semibold text-center mb-12 text-dark">
+                Performance Économique (PIB/hab. PPA)
+            </h3>
+            
+            <!-- Graphique PIB -->
+            <div class="bg-white rounded-lg p-6 mb-8 border border-gray-200">
+                <h4 class="text-xl font-medium mb-6 text-center text-dark">Évolution du PIB par Habitant (1990-2023)</h4>
+                <div class="relative h-80">
+                    <canvas id="gdpChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Barres de comparaison 2023 -->
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h5 class="text-lg font-medium mb-4 text-ci">🥉 Côte d'Ivoire</h5>
+                    <div class="relative">
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+                            <div class="stat-bar bg-ci h-3 rounded-full" style="width: 65%"></div>
+                        </div>
+                        <p class="text-2xl font-semibold text-dark mb-1">6 485 $</p>
+                        <p class="text-sm text-gray-600">Croissance stable +53% depuis 2010</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h5 class="text-lg font-medium mb-4 text-ng">🥈 Nigeria</h5>
+                    <div class="relative">
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+                            <div class="stat-bar bg-ng h-3 rounded-full" style="width: 55%"></div>
+                        </div>
+                        <p class="text-2xl font-semibold text-dark mb-1">5 593 $</p>
+                        <p class="text-sm text-gray-600">Volatilité pétrolière -9.8% depuis 2015</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h5 class="text-lg font-medium mb-4 text-ma">🥇 Maroc</h5>
+                    <div class="relative">
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+                            <div class="stat-bar bg-ma h-3 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <p class="text-2xl font-semibold text-dark mb-1">9 743 $</p>
+                        <p class="text-sm text-gray-600">Leader incontesté +692% depuis 1990</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Section Environnement -->
+    <section id="environment" class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-2xl font-semibold text-center mb-12 text-dark">
+                Impact Environnemental
+            </h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Graphique Émissions -->
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="text-xl font-medium mb-6 text-center text-dark">Émissions CO₂ par Habitant (2023)</h4>
+                    <div class="relative h-64">
+                        <canvas id="emissionsChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Comparaison avec moyenne mondiale -->
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="text-xl font-medium mb-6 text-dark">Contexte Global</h4>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Moyenne Mondiale</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-red-500 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                                <span class="font-medium text-dark">4.8t</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-ma">🇲🇦 Maroc</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-ma h-2 rounded-full" style="width: 40.6%"></div>
+                                </div>
+                                <span class="font-medium text-dark">1.95t</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-ng">🇳🇬 Nigeria</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-ng h-2 rounded-full" style="width: 11.7%"></div>
+                                </div>
+                                <span class="font-medium text-dark">0.56t</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-ci">🇨🇮 Côte d'Ivoire</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-ci h-2 rounded-full" style="width: 10.6%"></div>
+                                </div>
+                                <span class="font-medium text-dark">0.51t</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-3 bg-green-100 rounded border border-green-200">
+                        <p class="text-sm text-green-800">✓ <strong>Tous largement en dessous</strong> de la moyenne mondiale</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Section Éducation -->
+    <section id="education" class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-2xl font-semibold text-center mb-12 text-dark">
+                Développement Éducatif
+            </h3>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Évolution alphabétisation -->
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="text-xl font-medium mb-6 text-center text-dark">Évolution Alphabétisation (2000-2023)</h4>
+                    <div class="relative h-64">
+                        <canvas id="literacyChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Progrès par pays -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg p-6 border border-gray-200">
+                        <h5 class="text-lg font-medium mb-4 text-ma">🇲🇦 Maroc - Leader</h5>
+                        <div class="mb-3">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-600">Alphabétisation 2023</span>
+                                <span class="font-medium text-dark">77%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ma h-2 rounded-full" style="width: 77%"></div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700">+25 points depuis 2004. Scolarisation primaire ~100%</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 border border-gray-200">
+                        <h5 class="text-lg font-medium mb-4 text-ng">🇳🇬 Nigeria - Défis</h5>
+                        <div class="mb-3">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-600">Alphabétisation 2023</span>
+                                <span class="font-medium text-dark">63%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ng h-2 rounded-full" style="width: 63%"></div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700">20% des enfants non-scolarisés mondiaux. Fortes inégalités régionales</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 border border-gray-200">
+                        <h5 class="text-lg font-medium mb-4 text-ci">🇨🇮 Côte d'Ivoire - Rattrapage</h5>
+                        <div class="mb-3">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-600">Alphabétisation 2023</span>
+                                <span class="font-medium text-dark">53%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="stat-bar bg-ci h-2 rounded-full" style="width: 53%"></div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700">Progrès scolaires notables. Achèvement primaire: 78% (+19pts depuis 2012)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Section Numérique -->
+    <section id="digital" class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-2xl font-semibold text-center mb-12 text-dark">
+                Transformation Numérique
+            </h3>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-8 max-w-6xl mx-auto">
+                <!-- Maroc -->
+                <div class="bg-white rounded-lg p-6 border border-gray-200 text-center">
+                    <div class="w-20 h-20 rounded-full bg-ma/10 mx-auto mb-4 flex items-center justify-center text-2xl font-medium text-ma">
+                        91%
+                    </div>
+                    <h5 class="text-lg font-medium text-dark mb-2">🇲🇦 Maroc</h5>
+                    <p class="text-sm text-gray-600 mb-4">Leader africain incontesté</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="stat-bar bg-ma h-2 rounded-full" style="width: 91%"></div>
+                    </div>
+                </div>
+                
+                <!-- Nigeria -->
+                <div class="bg-white rounded-lg p-6 border border-gray-200 text-center">
+                    <div class="w-20 h-20 rounded-full bg-ng/10 mx-auto mb-4 flex items-center justify-center text-2xl font-medium text-ng">
+                        55%
+                    </div>
+                    <h5 class="text-lg font-medium text-dark mb-2">🇳🇬 Nigeria</h5>
+                    <p class="text-sm text-gray-600 mb-4">Stratégie "mobile-first"</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="stat-bar bg-ng h-2 rounded-full" style="width: 55.4%"></div>
+                    </div>
+                </div>
+                
+                <!-- Côte d'Ivoire -->
+                <div class="bg-white rounded-lg p-6 border border-gray-200 text-center">
+                    <div class="w-20 h-20 rounded-full bg-ci/10 mx-auto mb-4 flex items-center justify-center text-2xl font-medium text-ci">
+                        45%
+                    </div>
+                    <h5 class="text-lg font-medium text-dark mb-2">🇨🇮 Côte d'Ivoire</h5>
+                    <p class="text-sm text-gray-600 mb-4">Développement progressif</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="stat-bar bg-ci h-2 rounded-full" style="width: 45.4%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Évolution historique -->
+            <div class="bg-white rounded-lg p-6 border border-gray-200 max-w-6xl mx-auto">
+                <h4 class="text-xl font-medium mb-6 text-center text-dark">Évolution de la Pénétration Internet (2000-2023)</h4>
+                <div class="relative h-64">
+                    <canvas id="internetChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Section Analyse -->
+    <section id="analysis" class="py-16 px-6 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-2xl font-semibold text-center mb-12 text-dark">
+                Analyse Comparative et Recommandations
+            </h3>
+            
+            <!-- Forces et défis -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12 max-w-6xl mx-auto">
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="text-xl font-medium mb-6 text-ci">🇨🇮 Côte d'Ivoire</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <h5 class="text-base font-medium mb-2 text-green-600">Forces</h5>
+                            <ul class="text-gray-700 text-sm space-y-2">
+                                <li>• Croissance la plus stable (2010-2023)</li>
+                                <li>• Investissements éducatifs massifs</li>
+                                <li>• Diversification progressive</li>
+                                <li>• Stabilité politique retrouvée</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-base font-medium mb-2 text-red-600">Défis</h5>
+                            <ul class="text-gray-700 text-sm space-y-2">
+                                <li>• Base éducative encore faible</li>
+                                <li>• Fracture numérique rural-urbain</li>
+                                <li>• Dépendance aux matières premières</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="text-xl font-medium mb-6 text-ng">🇳🇬 Nigeria</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <h5 class="text-base font-medium mb-2 text-green-600">Forces</h5>
+                            <ul class="text-gray-700 text-sm space-y-2">
+                                <li>• Plus grande économie africaine</li>
+                                <li>• Potentiel démographique énorme</li>
+                                <li>• Leadership fintech mondial</li>
+                                <li>• Marché intérieur massif</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-base font-medium mb-2 text-red-600">Défis</h5>
+                            <ul class="text-gray-700 text-sm space-y-2">
+                                <li>• Volatilité liée au pétrole</li>
+                                <li>• Inégalités régionales fortes</li>
+                                <li>• Défis sécuritaires</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="text-xl font-medium mb-6 text-ma">🇲🇦 Maroc</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <h5 class="text-base font-medium mb-2 text-green-600">Forces</h5>
+                            <ul class="text-gray-700 text-sm space-y-2">
+                                <li>• Leader en connectivité (91%)</li>
+                                <li>• Éducation avancée (77%)</li>
+                                <li>• Économie diversifiée</li>
+                                <li>• Proximité européenne</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-base font-medium mb-2 text-red-600">Défis</h5>
+                            <ul class="text-gray-700 text-sm space-y-2">
+                                <li>• PIB nominal encore modeste</li>
+                                <li>• Inégalités sociales persistantes</li>
+                                <li>• Dépendance hydrique</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommandations -->
+            <div class="bg-white rounded-lg p-8 border border-gray-200 max-w-6xl mx-auto">
+                <h4 class="text-xl font-medium text-center mb-8 text-dark">
+                    Recommandations Stratégiques
+                </h4>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-blue-600">
+                            🤝
+                        </div>
+                        <h5 class="text-lg font-medium text-dark mb-4">Coopération Renforcée</h5>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li>• Partage d'expertise technologique</li>
+                            <li>• Intégration économique régionale</li>
+                            <li>• Harmonisation des cursus éducatifs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-green-600">
+                            🌱
+                        </div>
+                        <h5 class="text-lg font-medium text-dark mb-4">Développement Durable</h5>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li>• Transition énergétique commune</li>
+                            <li>• Maintien des faibles émissions</li>
+                            <li>• Innovation verte partagée</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-cyan-100 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl text-cyan-600">
+                            💻
+                        </div>
+                        <h5 class="text-lg font-medium text-dark mb-4">Transformation Numérique</h5>
+                        <ul class="text-gray-700 text-sm space-y-2">
+                            <li>• Infrastructure partagée</li>
+                            <li>• Formation numérique</li>
+                            <li>• E-gouvernement régional</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-200 bg-white">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-600 mb-4">Analyse comparative 1990-2023 | Sources: Banque Mondiale, UNESCO, ITU, DataReportal</p>
+            <p class="text-sm text-gray-500">Trois trajectoires distinctes, un avenir commun pour l'Afrique</p>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration des couleurs pour les graphiques
+        const colors = {
+            ci: {
+                background: 'rgba(230, 126, 34, 0.1)',
+                border: 'rgba(230, 126, 34, 1)'
+            },
+            ng: {
+                background: 'rgba(39, 174, 96, 0.1)',
+                border: 'rgba(39, 174, 96, 1)'
+            },
+            ma: {
+                background: 'rgba(192, 57, 43, 0.1)',
+                border: 'rgba(192, 57, 43, 1)'
+            }
+        };
+
+        // Graphique PIB
+        const gdpCtx = document.getElementById('gdpChart').getContext('2d');
+        new Chart(gdpCtx, {
+            type: 'line',
+            data: {
+                labels: ['1990', '1995', '2000', '2007', '2010', '2015', '2020', '2023'],
+                datasets: [{
+                    label: 'Côte d\'Ivoire',
+                    data: [4244, 4500, 4200, 4244, 4800, 5800, 6100, 6485],
+                    backgroundColor: colors.ci.background,
+                    borderColor: colors.ci.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ci.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }, {
+                    label: 'Nigeria',
+                    data: [3308, 3308, 3800, 4200, 5200, 6202, 5500, 5593],
+                    backgroundColor: colors.ng.background,
+                    borderColor: colors.ng.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ng.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }, {
+                    label: 'Maroc',
+                    data: [1229, 1300, 1499, 2200, 3068, 3200, 3268, 9743],
+                    backgroundColor: colors.ma.background,
+                    borderColor: colors.ma.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ma.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#495057',
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#6C757D'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            color: '#6C757D'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Graphique Émissions
+        const emissionsCtx = document.getElementById('emissionsChart').getContext('2d');
+        new Chart(emissionsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Côte d\'Ivoire', 'Nigeria', 'Maroc', 'Moyenne Mondiale'],
+                datasets: [{
+                    data: [0.51, 0.56, 1.95, 4.8],
+                    backgroundColor: [
+                        colors.ci.border,
+                        colors.ng.border,
+                        colors.ma.border,
+                        'rgba(239, 68, 68, 0.8)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#495057',
+                            padding: 20
+                        }
+                    }
+                },
+                cutout: '65%'
+            }
+        });
+
+        // Graphique Alphabétisation
+        const literacyCtx = document.getElementById('literacyChart').getContext('2d');
+        new Chart(literacyCtx, {
+            type: 'line',
+            data: {
+                labels: ['2002', '2008', '2015', '2018', '2020', '2022'],
+                datasets: [{
+                    label: 'Côte d\'Ivoire',
+                    data: [49, 50, 56.2, 56, 54, 53],
+                    backgroundColor: colors.ci.background,
+                    borderColor: colors.ci.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ci.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }, {
+                    label: 'Nigeria',
+                    data: [null, 51, 59, 62, 62.5, 63],
+                    backgroundColor: colors.ng.background,
+                    borderColor: colors.ng.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ng.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }, {
+                    label: 'Maroc',
+                    data: [null, 56, 68, 73, 78, 77],
+                    backgroundColor: colors.ma.background,
+                    borderColor: colors.ma.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ma.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#495057',
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#6C757D'
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            color: '#6C757D'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Graphique Internet
+        const internetCtx = document.getElementById('internetChart').getContext('2d');
+        new Chart(internetCtx, {
+            type: 'line',
+            data: {
+                labels: ['2000', '2005', '2009', '2015', '2020', '2023'],
+                datasets: [{
+                    label: 'Côte d\'Ivoire',
+                    data: [0.1, 1.5, 2.0, 22, 35, 45.4],
+                    backgroundColor: colors.ci.background,
+                    borderColor: colors.ci.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ci.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }, {
+                    label: 'Nigeria',
+                    data: [0, 0.5, 9.3, 30, 35.5, 55.4],
+                    backgroundColor: colors.ng.background,
+                    borderColor: colors.ng.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ng.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }, {
+                    label: 'Maroc',
+                    data: [0.7, 15, 33, 57, 70, 91],
+                    backgroundColor: colors.ma.background,
+                    borderColor: colors.ma.border,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: colors.ma.border,
+                    pointBorderWidth: 2,
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#495057',
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#6C757D'
+                        }
+                    },
+                    y: {
+                        min: 0,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)'
+                        },
+                        ticks: {
+                            color: '#6C757D'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Animation des barres de statistiques
+        document.querySelectorAll('.stat-bar').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 100);
+        });
+
+        // Navigation smooth
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
