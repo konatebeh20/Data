@@ -7,7 +7,7 @@ Ce dossier contient différents projets et études liés à la transformation di
 ### [Transformation Digitale des PME](/Transformation_Digitale_des_PME)
 Analyse des stratégies d'adaptation des PME ivoiriennes face à la digitalisation
 
-### [Évolution du Taux de Pénétration Mobile en Afrique](./Évolution%20du%20Taux%20de%20Pénétration%20Mobile%20en%20Afrique%20(2015-2025))
+### [Évolution du Taux de Pénétration Mobile en Afrique](./Evolution_du_Taux_de_Pénétration_Mobile_en_Afrique)
 Analyse des du taux de pénétration mobile en Afrique de 2015 à 2025, par région, en Afrique.
 
 <!-- ### [Évolution du Taux de Pénétration Mobile en Afrique](/Evolution_du_Taux_de Pénétration_Mobile_en_Afrique) -->
